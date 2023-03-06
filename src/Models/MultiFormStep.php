@@ -475,8 +475,8 @@ class MultiFormStep extends DataObject
     {
         // load the steps in the cache, if this one doesn't exist
         if (!array_key_exists('steps_' . $fromStep, $this->step_data_cache)) {
-            $steps = self::get()->filter('SessionID', $this->form->session->ID);
-
+            $steps = MultiFormStep::get()->filter('SessionID', $this->form->getMultiFormSession()->ID);
+            
             if ($steps) {
                 foreach ($steps as $step) {
                     $this->step_data_cache['steps_' . $step->ClassName] = $step->loadData();
